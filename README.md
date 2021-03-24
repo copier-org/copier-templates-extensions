@@ -35,14 +35,15 @@ pyenv global system 3.6.12
 
 With `pip`:
 ```bash
-python3.6 -m pip install copier-templates-extensions
+pip install copier-templates-extensions
 ```
 
 With [`pipx`](https://github.com/pipxproject/pipx):
 ```bash
-python3.6 -m pip install --user pipx
+pip install --user pipx
 
-pipx install --python python3.6 copier-templates-extensions
+pipx install copier
+pipx inject copier copier-templates-extensions
 ```
 
 ## Usage
