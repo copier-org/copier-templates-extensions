@@ -1,0 +1,20 @@
+# Changes here will be overwritten by Copier
+_commit: 0.3.1
+_src_path: gh:pawamoy/copier-poetry
+author_email: pawamoy@pm.me
+author_fullname: "Timoth\xE9e Mazzucotelli"
+author_username: pawamoy
+copyright_date: '2021'
+copyright_holder: "Timoth\xE9e Mazzucotelli"
+copyright_holder_email: pawamoy@pm.me
+copyright_license: ISC License
+project_description: Special Jinja2 extension for Copier that allows to load extensions
+  using file paths relative to the template root instead of Python dotted paths.
+project_name: Copier Templates Extensions
+python_package_command_line_name: copier-templates-extensions
+python_package_distribution_name: copier-templates-extensions
+python_package_import_name: copier_templates_extensions
+repository_name: copier-templates-extensions
+repository_namespace: pawamoy
+repository_provider: github.com
+use_precommit: false
