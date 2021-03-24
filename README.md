@@ -44,3 +44,26 @@ python3.6 -m pip install --user pipx
 
 pipx install --python python3.6 copier-templates-extensions
 ```
+
+## Usage
+
+:warning: This is not yet functional.
+We need something from Copier first:
+a way to get the path to the template on the disk.
+For example, Copier could set an environment variable
+with the path to the temporary cloned template as value.
+
+---
+
+In your template configuration,
+first add this extension,
+then add your templates extensions
+using relative file paths,
+and the class name after a colon:
+
+```yaml
+_extensions:
+- copier_templates_extensions.Ext
+- extensions/context.py:ContextUpdateExtension
+- extensions/slugify.py:SlugifyExtension
+```
