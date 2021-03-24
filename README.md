@@ -67,3 +67,14 @@ _extensions:
 - extensions/context.py:ContextUpdateExtension
 - extensions/slugify.py:SlugifyExtension
 ```
+
+## How does it work?
+
+Beware the ugly hack!
+Upon loading this special extension,
+the function responsible for importing
+a Python object using its dotted-path (a string)
+is patched in the `jinja.environment` module,
+where it's used to load extensions.
+The patched version adds support
+for loading extensions using relative file paths.
