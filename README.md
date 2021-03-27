@@ -69,6 +69,46 @@ _extensions:
 - extensions/slugify.py:SlugifyExtension
 ```
 
+### Context hook extension
+
+This package also provides a convenient extension class
+allowing template writers to update the context used
+to render templates, in order to add, modify or remove
+items of the context.
+
+In one of your relative path extensions modules,
+create a class that inherits from `ContextHook`,
+and override its `hook` method:
+
+```python
+from copier_templates_extensions import ContextHook
+
+
+class ContextUpdater(ContextHook):
+    def hook(self, context):
+        new_context = {}
+        new_context["say"] = "hello " + context["name"]
+        return new_context
+```
+
+Using the above example, your context will be updated
+with the `new_context` returned by the method.
+If you prefer to modify the context in-place instead,
+for example to *remove* items from it,
+set the `update` class attribute to `False`:
+
+```python
+from copier_templates_extensions import ContextHook
+
+
+class ContextUpdater(ContextHook):
+    update = False
+
+    def hook(self, context):
+        context["say"] = "hello " + context["name"]
+        del context["name"]
+```
+
 ## How does it work?
 
 Beware the ugly hack!
