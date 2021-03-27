@@ -12,7 +12,7 @@ nav:
   - Credits: credits.md
   - License: license.md
 - Code Reference:
-  - cli.py: reference/cli.md
+  - extensions: reference/extensions.md
 - Development:
   - Contributing: contributing.md
   - Code of Conduct: code_of_conduct.md
