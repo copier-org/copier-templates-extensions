@@ -8,7 +8,7 @@ from jinja2 import environment as jinja_env_module
 from jinja2.ext import Extension
 
 
-class TemplateRelativePath(Extension):
+class TemplateExtensionLoader(Extension):
     """Extension allowing to load other extensions using relative file paths."""
 
     def __init__(self, environment):
@@ -23,7 +23,7 @@ class TemplateRelativePath(Extension):
 
     def _patched_import_string(self, import_name, silent=False):
         try:
-            self._import_string(import_name)
+            return self._import_string(import_name)
         except Exception:
             if not silent:
                 raise
@@ -31,20 +31,20 @@ class TemplateRelativePath(Extension):
     def _import_string(self, import_name):
         if ":" in import_name:
             module_name, obj = import_name.split(":", 1)
-            module = self._import_module(module_name, try_filepath=True)
+            module = self._import_module(module_name, obj, try_filepath=True)
 
         elif "." in import_name:
             module_name, _, obj = import_name.rpartition(".")
-            module = self._import_module(module_name)
+            module = self._import_module(module_name, obj)
 
         else:
             return __import__(import_name)
 
         return getattr(module, obj)
 
-    def _import_module(self, name, try_filepath=False):
+    def _import_module(self, module_name, obj_name, try_filepath=False):
         try:
-            return __import__(module_name, None, None, [obj])
+            return __import__(module_name, None, None, [obj_name])
         except ImportError:
             if try_filepath:
                 return self._import_template_module(module_name)
