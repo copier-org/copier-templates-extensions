@@ -30,17 +30,28 @@ class TemplateExtensionLoader(Extension):
 
     def _import_string(self, import_name):
         if ":" in import_name:
-            module_name, obj = import_name.split(":", 1)
-            module = self._import_module(module_name, obj, try_filepath=True)
+            module_name, obj_name = import_name.split(":", 1)
+            module = self._import_module(module_name, obj_name, try_filepath=True)
+            return self._get_module_attribute(module, obj_name)
 
-        elif "." in import_name:
-            module_name, _, obj = import_name.rpartition(".")
-            module = self._import_module(module_name, obj)
+        if "." in import_name:
+            module_name, _, obj_name = import_name.rpartition(".")
+            module = self._import_module(module_name, obj_name)
+            return self._get_module_attribute(module, obj_name)
 
-        else:
+        try:
             return __import__(import_name)
+        except ImportError:
+            raise UserMessageError(f"Could not import extension '{import_name}'")
 
-        return getattr(module, obj)
+    def _get_module_attribute(self, module, obj_name):
+        try:
+            return getattr(module, obj_name)
+        except AttributeError:
+            raise UserMessageError(
+                f"Module '{module.__name__}' does not have the '{obj_name}' attribute.\n"
+                "Please report this issue to the template maintainers."
+            )
 
     def _import_module(self, module_name, obj_name, try_filepath=False):
         try:
@@ -48,7 +59,7 @@ class TemplateExtensionLoader(Extension):
         except ImportError:
             if try_filepath:
                 return self._import_template_module(module_name)
-            raise
+            raise UserMessageError(f"Could not import extension '{obj_name}' fromo '{module_name}'")
 
     def _import_template_module(self, relative_path):
         module_name = Path(relative_path).stem
