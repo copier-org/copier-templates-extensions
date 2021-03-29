@@ -1,0 +1,7 @@
+_jinja_extensions:
+- copier_templates_extensions.TemplateExtensionLoader
+- extensions.py:ContextUpdater
+
+name:
+  type: str
+  default: "pawamoy"
