@@ -7,7 +7,6 @@ using file paths relative to the template root instead of Python dotted paths.
 
 from typing import List
 
-from copier_templates_extensions.extensions.context_hook import ContextHook
-from copier_templates_extensions.extensions.relative_path import TemplateRelativePath
+from copier_templates_extensions.extensions.context import ContextHook
 
 __all__: List[str] = ["ContextHook", "TemplateRelativePath"]  # noqa: WPS410 (the only __variable__ we use)

@@ -1,7 +1,6 @@
 """Extension allowing to modify the Copier context."""
 
 from jinja2.ext import Extension
-from jinja2.runtime import Context
 
 
 class ContextHook(Extension):
@@ -17,7 +16,7 @@ class ContextHook(Extension):
         """
         super().__init__(environment)
 
-        class ContextClass(Context):  # noqa: WPS431 (nested class)
+        class ContextClass(environment.context_class):  # noqa: WPS431 (nested class)
             def __init__(self, env, parent, name, blocks):
                 if "_copier_conf" in parent:
                     if extension_self.update:
