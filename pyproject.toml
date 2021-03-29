@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "copier-templates-extensions"
-version = "0.1.0"
+version = "0.1.1"
 description = "Special Jinja2 extension for Copier that allows to load extensions using file paths relative to the template root instead of Python dotted paths."
 authors = ["Timothée Mazzucotelli <pawamoy@pm.me>"]
 license = "ISC License"
