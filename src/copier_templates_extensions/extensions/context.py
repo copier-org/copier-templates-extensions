@@ -38,7 +38,9 @@ class ContextHook(Extension):
         Arguments:
             context: The context to modify.
 
-        Returns:
-            Same context modified, or new one.
+        Raises:
+            NotImplementedError: This method must be overridden in a subclass,
+                and instead return either the same context instance modified,
+                or new context instance (dictionary).
         """
-        return {}
+        raise NotImplementedError
