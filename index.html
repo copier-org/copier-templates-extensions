@@ -644,20 +644,14 @@ pipx install copier
 pipx inject copier copier-templates-extensions
 </code></pre></div></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">¤</a></h2>
-<p><img alt="⚠️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26a0.png" title=":warning:" /> This is not yet functional.
-We need something from Copier first:
-a way to get the path to the template on the disk.
-For example, Copier could set an environment variable
-with the path to the temporary cloned template as value.</p>
-<hr />
 <p>In your template configuration,
-first add this extension,
+first add our loader extension,
 then add your templates extensions
 using relative file paths,
 and the class name after a colon:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">_extensions</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">copier_templates_extensions.Ext</span>
-<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions/context.py:ContextUpdateExtension</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">copier_templates_extensions.TemplateExtensionLoader</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions/context.py:ContextUpdater</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">extensions/slugify.py:SlugifyExtension</span>
 </code></pre></div>
 <h3 id="context-hook-extension">Context hook extension<a class="headerlink" href="#context-hook-extension" title="Permanent link">¤</a></h3>
@@ -694,13 +688,17 @@ set the <code>update</code> class attribute to <code>False</code>:</p>
 </code></pre></div>
 <h2 id="how-does-it-work">How does it work?<a class="headerlink" href="#how-does-it-work" title="Permanent link">¤</a></h2>
 <p>Beware the ugly hack!
-Upon loading this special extension,
+Upon loading the special <em>loader</em> extension,
 the function responsible for importing
 a Python object using its dotted-path (a string)
 is patched in the <code>jinja.environment</code> module,
 where it's used to load extensions.
 The patched version adds support
-for loading extensions using relative file paths.</p>
+for loading extensions using relative file paths.
+The file system loader of the Jinja environment
+and its <code>searchpaths</code> attribute are used to
+find the local clone of the template and determine
+the absolute path of the extensions to load.</p>
                 
               
               
