@@ -48,24 +48,16 @@ pipx inject copier copier-templates-extensions
 
 ## Usage
 
-:warning: This is not yet functional.
-We need something from Copier first:
-a way to get the path to the template on the disk.
-For example, Copier could set an environment variable
-with the path to the temporary cloned template as value.
-
----
-
 In your template configuration,
-first add this extension,
+first add our loader extension,
 then add your templates extensions
 using relative file paths,
 and the class name after a colon:
 
 ```yaml
 _extensions:
-- copier_templates_extensions.Ext
-- extensions/context.py:ContextUpdateExtension
+- copier_templates_extensions.TemplateExtensionLoader
+- extensions/context.py:ContextUpdater
 - extensions/slugify.py:SlugifyExtension
 ```
 
@@ -112,10 +104,14 @@ class ContextUpdater(ContextHook):
 ## How does it work?
 
 Beware the ugly hack!
-Upon loading this special extension,
+Upon loading the special *loader* extension,
 the function responsible for importing
 a Python object using its dotted-path (a string)
 is patched in the `jinja.environment` module,
 where it's used to load extensions.
 The patched version adds support
 for loading extensions using relative file paths.
+The file system loader of the Jinja environment
+and its `searchpaths` attribute are used to
+find the local clone of the template and determine
+the absolute path of the extensions to load.
