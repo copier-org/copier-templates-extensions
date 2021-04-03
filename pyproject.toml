@@ -27,7 +27,7 @@ isort = "^5.7.0"
 mypy = "^0.812"
 pytest = "^6.2.2"
 pytest-cov = "^2.11.1"
-pytest-randomly = "^3.5.0"
+pytest-randomly = "<3.6.0"
 pytest-sugar = "^0.9.4"
 pytest-xdist = "^2.2.0"
 
