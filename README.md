@@ -55,7 +55,7 @@ using relative file paths,
 and the class name after a colon:
 
 ```yaml
-_extensions:
+_jinja_extensions:
 - copier_templates_extensions.TemplateExtensionLoader
 - extensions/context.py:ContextUpdater
 - extensions/slugify.py:SlugifyExtension
