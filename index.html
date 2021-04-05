@@ -724,6 +724,73 @@ set the <code>update</code> class attribute to <code>False</code>:</p>
         <span class="n">context</span><span class="p">[</span><span class="s2">&quot;say&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;hello &quot;</span> <span class="o">+</span> <span class="n">context</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
         <span class="k">del</span> <span class="n">context</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
 </code></pre></div>
+<p>In your Jinja templates, you will now have access
+to the <code>{{ say }}</code> variable directly.</p>
+<p>This can be extremely useful in template projects
+where you don't want to ask too many questions to the users
+and instead infer some values from their answers.</p>
+<p>Consider the following example:
+you ask your users if they want to generate
+a CLI app or a web API.
+Depending on their answer,
+the main Python module should be named
+<code>cli.py</code> or <code>app.py</code>.</p>
+<p>Without the context hook,
+you would need to write a Jinja macro somewhere,
+or update the context directly in Jinja,
+and import this file (still using Jinja)
+<em>in the filename of the module</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="c">{# using macros #}</span><span class="x"></span>
+<span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">module_name</span><span class="o">()</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">project_type</span> <span class="o">==</span> <span class="s2">&quot;webapi&quot;</span> <span class="cp">%}</span><span class="x">app</span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x">cli</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span><span class="x"></span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c">{# or enhancing the context #}</span><span class="x"></span>
+<span class="c">{#- Initiate context with a copy of Copier answers -#}</span><span class="x"></span>
+<span class="cp">{%</span>- <span class="k">set</span> <span class="nv">ctx</span> <span class="o">=</span> <span class="nv">_copier_answers.copy</span><span class="o">()</span> -<span class="cp">%}</span><span class="x"></span>
+
+<span class="c">{#- Populate our new variables -#}</span><span class="x"></span>
+<span class="cp">{%</span>- <span class="k">set</span> <span class="kp">_</span> <span class="o">=</span> <span class="nv">ctx.update</span><span class="o">({</span><span class="s2">&quot;module_name&quot;</span><span class="o">:</span> <span class="o">(</span><span class="s2">&quot;app&quot;</span> <span class="k">if</span> <span class="nv">project_type</span> <span class="o">==</span> <span class="s2">&quot;webapi&quot;</span> <span class="k">else</span> <span class="s2">&quot;cli&quot;</span><span class="o">)</span> -<span class="cp">%}</span><span class="x"></span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>📁 template_root
+├── 📄 copier.yml
+├── 📄 macros      # the macros file
+├── 📄 context     # the context file
+├── 📁 extensions
+│   └── 📄 slugify.py
+└── 📁 {{project_name|slugify}}
+    │
+    │   # using the macros
+    ├── 📄 {% import &#39;macros&#39; as macros with context %}{{macros.module_name()}}.py.jinja
+    │
+    │   # or using the enhanced context
+    └── 📄 {% from &#39;context&#39; import ctx with context %}{{ctx.module_name}}.py.jinja
+</code></pre></div>
+<p>As you can see, both forms are really ugly to write:</p>
+<ul>
+<li>the <code>macros</code> or <code>context</code> can only be placed in the root,
+  as slashes <code>/</code> are not allowed in filenames</li>
+<li>you must use spaces and single-quotes
+  (double-quotes are not valid filename characters on Windows)
+  in your templated filenames, which is not clean</li>
+<li>filenames are very long</li>
+</ul>
+<p><strong>Using our context hook instead makes it so easy and clean!</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">copier_templates_extensions</span> <span class="kn">import</span> <span class="n">ContextHook</span>
+
+
+<span class="k">class</span> <span class="nc">ContextUpdater</span><span class="p">(</span><span class="n">ContextHook</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;module_name&quot;</span><span class="p">:</span> <span class="s2">&quot;app&quot;</span> <span class="k">if</span> <span class="n">context</span><span class="p">[</span><span class="s2">&quot;project_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;webapi&quot;</span> <span class="k">else</span> <span class="s2">&quot;cli&quot;</span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>📁 template_root
+├── 📄 copier.yml
+├── 📁 extensions
+│   ├── 📄 slugify.py
+│   └── 📄 context.py
+└── 📁 {{project_name|slugify}}
+    └── 📄 {{module_name}}.py.jinja
+</code></pre></div>
 <h2 id="how-does-it-work">How does it work?<a class="headerlink" href="#how-does-it-work" title="Permanent link">¤</a></h2>
 <p>Beware the ugly hack!
 Upon loading the special <em>loader</em> extension,
