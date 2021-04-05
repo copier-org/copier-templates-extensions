@@ -1,5 +1,6 @@
 .idea/
 __pycache__/
+__pypackages__/
 *.py[cod]
 dist/
 *.egg-info/
@@ -11,3 +12,5 @@ pip-wheel-metadata/
 site/
 poetry.lock
 .venv/
+.pdm.toml
+pdm.lock
