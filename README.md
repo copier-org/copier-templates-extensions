@@ -150,6 +150,88 @@ class ContextUpdater(ContextHook):
         del context["name"]
 ```
 
+In your Jinja templates, you will now have access
+to the `{{ say }}` variable directly.
+
+This can be extremely useful in template projects
+where you don't want to ask too many questions to the users
+and instead infer some values from their answers.
+
+Consider the following example:
+you ask your users if they want to generate
+a CLI app or a web API.
+Depending on their answer,
+the main Python module should be named
+`cli.py` or `app.py`.
+
+Without the context hook,
+you would need to write a Jinja macro somewhere,
+or update the context directly in Jinja,
+and import this file (still using Jinja)
+*in the filename of the module*:
+
+```jinja
+{# using macros #}
+{%- macro module_name() %}
+  {%- if project_type == "webapi" %}app{% else %}cli{% endif %}
+{%- endmacro %}
+```
+
+```jinja
+{# or enhancing the context #}
+{#- Initiate context with a copy of Copier answers -#}
+{%- set ctx = _copier_answers.copy() -%}
+
+{#- Populate our new variables -#}
+{%- set _ = ctx.update({"module_name": ("app" if project_type == "webapi" else "cli") -%}
+```
+
+```
+📁 template_root
+├── 📄 copier.yml
+├── 📄 macros      # the macros file
+├── 📄 context     # the context file
+├── 📁 extensions
+│   └── 📄 slugify.py
+└── 📁 {{project_name|slugify}}
+    │
+    │   # using the macros
+    ├── 📄 {% import 'macros' as macros with context %}{{macros.module_name()}}.py.jinja
+    │
+    │   # or using the enhanced context
+    └── 📄 {% from 'context' import ctx with context %}{{ctx.module_name}}.py.jinja
+```
+
+As you can see, both forms are really ugly to write:
+
+- the `macros` or `context` can only be placed in the root,
+  as slashes `/` are not allowed in filenames
+- you must use spaces and single-quotes
+  (double-quotes are not valid filename characters on Windows)
+  in your templated filenames, which is not clean
+- filenames are very long
+
+**Using our context hook instead makes it so easy and clean!**
+
+```python
+from copier_templates_extensions import ContextHook
+
+
+class ContextUpdater(ContextHook):
+    def hook(self, context):
+        return {"module_name": "app" if context["project_type"] == "webapi" else "cli"}
+```
+
+```
+📁 template_root
+├── 📄 copier.yml
+├── 📁 extensions
+│   ├── 📄 slugify.py
+│   └── 📄 context.py
+└── 📁 {{project_name|slugify}}
+    └── 📄 {{module_name}}.py.jinja
+```
+
 ## How does it work?
 
 Beware the ugly hack!
