@@ -5,12 +5,15 @@ __pypackages__/
 dist/
 *.egg-info/
 build/
+htmlcov/
 .coverage*
 pip-wheel-metadata/
 .pytest_cache/
 .mypy_cache/
 site/
-poetry.lock
+pdm.lock
+.pdm.toml
+__pypackages__/
 .venv/
 .pdm.toml
 pdm.lock
