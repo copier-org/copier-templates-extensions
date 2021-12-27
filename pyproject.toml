@@ -8,7 +8,8 @@ description = "Special Jinja2 extension for Copier that allows to load extension
 authors = [{name = "Timothée Mazzucotelli", email = "pawamoy@pm.me"}]
 license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = ">=3.6.2"
+# TODO: remove cap once https://github.com/copier-org/copier/pull/509/ is released
+requires-python = ">=3.6.2,<3.11"
 keywords = ["copier", "templates", "extension"]
 dynamic = ["version"]
 classifiers = [
