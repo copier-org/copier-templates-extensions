@@ -326,8 +326,6 @@ def format(ctx):
     Arguments:
         ctx: The context instance (passed automatically).
     """
-    commit = "166758a98d5e544aaa94fda698128e00733497f4"
-    template_url = f"https://raw.githubusercontent.com/pawamoy/jinja-templates/{commit}/keepachangelog.md"
     ctx.run(
         f"autoflake -ir --exclude tests/fixtures --remove-all-unused-imports {PY_SRC}",
         title="Removing unused imports",
