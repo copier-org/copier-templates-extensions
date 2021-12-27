@@ -29,7 +29,7 @@ def test_extensions(tmp_path, template_name, expected):
         expected: The parametrized value we expect.
     """
     template_path = TEMPLATES_DIRECTORY / template_name
-    copier.copy(str(template_path), tmp_path, force=True)
+    copier.copy(str(template_path), tmp_path, defaults=True, overwrite=True)
     result_file = tmp_path / "result.txt"
     assert result_file.exists()
     assert result_file.read_text() == f"Success variable: {expected}"
@@ -55,6 +55,6 @@ def test_extensions_raising_exceptions(tmp_path, template_name, exception):
     """
     template_path = TEMPLATES_DIRECTORY / template_name
     with pytest.raises(exception):
-        copier.copy(str(template_path), tmp_path, force=True)
+        copier.copy(str(template_path), tmp_path, defaults=True, overwrite=True)
     assert not (tmp_path / "result.txt").exists()
     assert not (tmp_path / "extensions.py").exists()
