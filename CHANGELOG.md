@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [0.2.0](https://github.com/pawamoy/copier-templates-extensions/releases/tag/0.2.0) - 2021-12-27
+
+<small>[Compare with 0.1.1](https://github.com/pawamoy/copier-templates-extensions/compare/0.1.1...0.2.0)</small>
+
+### Build
+- Match Python cap to Copier's ([a04f938](https://github.com/pawamoy/copier-templates-extensions/commit/a04f93813f9795b64cbd9d21209dd5e5127b3eb4) by Timothée Mazzucotelli).
+
+### Features
+- Support Jinja2 version 3.x ([55211df](https://github.com/pawamoy/copier-templates-extensions/commit/55211df29c4118c2603cc18ea4a1bc4247e41176) by Timothée Mazzucotelli).
+
+
 ## [0.1.1](https://github.com/pawamoy/copier-templates-extensions/releases/tag/0.1.1) - 2021-03-29
 
 <small>[Compare with 0.1.0](https://github.com/pawamoy/copier-templates-extensions/compare/0.1.0...0.1.1)</small>
