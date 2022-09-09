@@ -27,7 +27,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "copier>=6.0.0a9",
+    "copier>=6",
 ]
 
 [project.urls]
@@ -39,9 +39,6 @@ Issues = "https://github.com/pawamoy/copier-templates-extensions/issues"
 Discussions = "https://github.com/pawamoy/copier-templates-extensions/discussions"
 Gitter = "https://gitter.im/copier-templates-extensions/community"
 Funding = "https://github.com/sponsors/pawamoy"
-
-[project.scripts]
-copier-templates-extensions = "copier_templates_extensions.cli:main"
 
 [tool.pdm]
 version = {source = "scm"}
