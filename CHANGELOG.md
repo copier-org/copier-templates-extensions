@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [0.3.0](https://github.com/copier-org/copier-templates-extensions/releases/tag/0.3.0) - 2022-09-12
+
+<small>[Compare with 0.2.0](https://github.com/copier-org/copier-templates-extensions/compare/0.2.0...0.3.0)</small>
+
+### Build
+- Require Copier v6+ (Python >= 3.7) ([6380c90](https://github.com/copier-org/copier-templates-extensions/commit/6380c90a3e26c596790d9a083673dcf1dd613678) by Timothée Mazzucotelli).
+
+
 ## [0.2.0](https://github.com/copier-org/copier-templates-extensions/releases/tag/0.2.0) - 2021-12-27
 
 <small>[Compare with 0.1.1](https://github.com/copier-org/copier-templates-extensions/compare/0.1.1...0.2.0)</small>
