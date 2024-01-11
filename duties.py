@@ -193,11 +193,12 @@ def docs_deploy(ctx: Context) -> None:
     Parameters:
         ctx: The context instance (passed automatically).
     """
-    os.environ["DEPLOY"] = "true"
-    with material_insiders() as insiders:
-        if not insiders:
-            ctx.run(lambda: False, title="Not deploying docs without Material for MkDocs Insiders!")
-        ctx.run(mkdocs.gh_deploy(), title="Deploying documentation")
+    # os.environ["DEPLOY"] = "true"
+    # with material_insiders() as insiders:
+    #     if not insiders:
+    #         ctx.run(lambda: False, title="Not deploying docs without Material for MkDocs Insiders!")
+    #     ctx.run(mkdocs.gh_deploy(), title="Deploying documentation")
+    ctx.run("false", title="We do not deploy docs for this project yet.", nofail=True)
 
 
 @duty
