@@ -1,6 +1,14 @@
 """Extension allowing to modify the Copier context."""
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from jinja2.ext import Extension
+
+if TYPE_CHECKING:
+    from jinja2 import Environment
+from typing import Any, Callable, MutableMapping
 
 
 class ContextHook(Extension):
@@ -8,21 +16,28 @@ class ContextHook(Extension):
 
     update = True
 
-    def __init__(extension_self, environment):  # noqa: N805
+    def __init__(extension_self: Extension, environment: Environment) -> None:  # noqa: N805
         """Initialize the object.
 
         Arguments:
             environment: The Jinja environment.
         """
-        super().__init__(environment)
+        super().__init__(environment)  # type: ignore[misc]
 
-        class ContextClass(environment.context_class):
-            def __init__(self, env, parent, name, blocks, globals=None):  # noqa: A002
+        class ContextClass(environment.context_class):  # type: ignore[name-defined]
+            def __init__(
+                self,
+                env: Environment,
+                parent: dict[str, Any],
+                name: str | None,
+                blocks: dict[str, Callable],
+                globals: MutableMapping[str, Any] | None = None,  # noqa: A002,ARG002
+            ):
                 if "_copier_conf" in parent:
-                    if extension_self.update:
-                        parent.update(extension_self.hook(parent))
+                    if extension_self.update:  # type: ignore[attr-defined]
+                        parent.update(extension_self.hook(parent))  # type: ignore[attr-defined]
                     else:
-                        extension_self.hook(parent)
+                        extension_self.hook(parent)  # type: ignore[attr-defined]
                 super().__init__(env, parent, name, blocks)
 
         environment.context_class = ContextClass

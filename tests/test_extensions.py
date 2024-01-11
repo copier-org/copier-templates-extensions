@@ -20,7 +20,7 @@ TEMPLATES_DIRECTORY = Path(__file__).parent / "fixtures"
         ("loading_normal_extension", "not set"),
     ],
 )
-def test_extensions(tmp_path, template_name, expected):
+def test_extensions(tmp_path: Path, template_name: str, expected: str) -> None:
     """Test loader and context extensions.
 
     Arguments:
@@ -29,7 +29,7 @@ def test_extensions(tmp_path, template_name, expected):
         expected: The parametrized value we expect.
     """
     template_path = TEMPLATES_DIRECTORY / template_name
-    copier.copy(str(template_path), tmp_path, defaults=True, overwrite=True)
+    copier.run_copy(str(template_path), tmp_path, defaults=True, overwrite=True, unsafe=True)
     result_file = tmp_path / "result.txt"
     assert result_file.exists()
     assert result_file.read_text() == f"Success variable: {expected}"
@@ -45,7 +45,7 @@ def test_extensions(tmp_path, template_name, expected):
         ("cant_find_extension_package", UserMessageError),
     ],
 )
-def test_extensions_raising_exceptions(tmp_path, template_name, exception):
+def test_extensions_raising_exceptions(tmp_path: Path, template_name: str, exception: type) -> None:
     """See what happens when an extension raises an exception.
 
     Arguments:
@@ -55,6 +55,6 @@ def test_extensions_raising_exceptions(tmp_path, template_name, exception):
     """
     template_path = TEMPLATES_DIRECTORY / template_name
     with pytest.raises(exception):
-        copier.copy(str(template_path), tmp_path, defaults=True, overwrite=True)
+        copier.run_copy(str(template_path), tmp_path, defaults=True, overwrite=True, unsafe=True)
     assert not (tmp_path / "result.txt").exists()
     assert not (tmp_path / "extensions.py").exists()
