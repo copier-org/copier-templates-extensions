@@ -50,7 +50,7 @@ class TemplateExtensionLoader(Extension):
         except AttributeError:
             raise UserMessageError(
                 f"Module '{module.__name__}' does not have the '{obj_name}' attribute.\n"
-                "Please report this issue to the template maintainers."
+                "Please report this issue to the template maintainers.",
             )
 
     def _import_module(self, module_name, obj_name, try_filepath=False):
@@ -63,14 +63,14 @@ class TemplateExtensionLoader(Extension):
 
     def _import_template_module(self, relative_path):
         module_name = Path(relative_path).stem
-        for search_path in self.environment.loader.searchpath:  # noqa: WPS503
+        for search_path in self.environment.loader.searchpath:
             template_relative_path = Path(search_path) / relative_path
             if template_relative_path.exists():
                 break
         else:
             raise UserMessageError(
                 f"Could not resolve path to local extension module '{relative_path}'\n"
-                "Please report this issue to the template maintainers."
+                "Please report this issue to the template maintainers.",
             )
         spec = spec_from_file_location(
             f"copier_templates_extensions.{module_name}",

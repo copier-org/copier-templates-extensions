@@ -8,7 +8,7 @@ class ContextHook(Extension):
 
     update = True
 
-    def __init__(extension_self, environment):  # noqa: N805 (self)
+    def __init__(extension_self, environment):  # noqa: N805
         """Initialize the object.
 
         Arguments:
@@ -16,8 +16,8 @@ class ContextHook(Extension):
         """
         super().__init__(environment)
 
-        class ContextClass(environment.context_class):  # noqa: WPS431 (nested class)
-            def __init__(self, env, parent, name, blocks, globals=None):  # noqa: A002,VNE003
+        class ContextClass(environment.context_class):
+            def __init__(self, env, parent, name, blocks, globals=None):  # noqa: A002
                 if "_copier_conf" in parent:
                     if extension_self.update:
                         parent.update(extension_self.hook(parent))
