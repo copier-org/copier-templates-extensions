@@ -26,7 +26,7 @@ class TemplateExtensionLoader(Extension):
         """
         super().__init__(environment)
         # patch jinja's extension loading mechanism
-        jinja_env_module.import_string = self._patched_import_string  # type: ignore[assignment]
+        jinja_env_module.import_string = self._patched_import_string  # type: ignore[assignment,attr-defined]
 
     def _patched_import_string(self, import_name: str, *, silent: bool = False) -> Any:
         try:
