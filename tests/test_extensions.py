@@ -58,3 +58,22 @@ def test_extensions_raising_exceptions(tmp_path: Path, template_name: str, excep
         copier.run_copy(str(template_path), tmp_path, defaults=True, overwrite=True, unsafe=True)
     assert not (tmp_path / "result.txt").exists()
     assert not (tmp_path / "extensions.py").exists()
+
+
+@pytest.mark.parametrize(
+    "template_name",
+    ["deprecation_warning_hook_return", "deprecation_warning_update_attr"],
+)
+def test_deprecated_usage(tmp_path: Path, template_name: str) -> None:
+    """Test deprecation warnings.
+
+    Arguments:
+        tmp_path: A pytest fixture.
+        template_name: The parametrized template to use.
+    """
+    template_path = TEMPLATES_DIRECTORY / template_name
+    with pytest.warns(DeprecationWarning):
+        copier.run_copy(str(template_path), tmp_path, defaults=True, overwrite=True, unsafe=True)
+    result_file = tmp_path / "result.txt"
+    assert result_file.exists()
+    assert result_file.read_text() == "Success variable: True"
