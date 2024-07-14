@@ -105,27 +105,7 @@ from copier_templates_extensions import ContextHook
 
 class ContextUpdater(ContextHook):
     def hook(self, context):
-        new_context = {}
-        new_context["say"] = "hello " + context["name"]
-        return new_context
-```
-
-Using the above example, your context will be updated
-with the `new_context` returned by the method.
-If you prefer to modify the context in-place instead,
-for example to *remove* items from it,
-set the `update` class attribute to `False`:
-
-```python
-from copier_templates_extensions import ContextHook
-
-
-class ContextUpdater(ContextHook):
-    update = False
-
-    def hook(self, context):
         context["say"] = "hello " + context["name"]
-        del context["name"]
 ```
 
 In your Jinja templates, you will now have access
@@ -197,7 +177,7 @@ from copier_templates_extensions import ContextHook
 
 class ContextUpdater(ContextHook):
     def hook(self, context):
-        return {"module_name": "app" if context["project_type"] == "webapi" else "cli"}
+        context["module_name"] = "app" if context["project_type"] == "webapi" else "cli"
 ```
 
 ```
