@@ -1,9 +1,9 @@
 # Copier Templates Extensions
 
 [![ci](https://github.com/copier-org/copier-templates-extensions/workflows/ci/badge.svg)](https://github.com/copier-org/copier-templates-extensions/actions?query=workflow%3Aci)
-[![documentation](https://img.shields.io/badge/docs-mkdocs%20material-blue.svg?style=flat)](https://copier-org.github.io/copier-templates-extensions/)
+[![documentation](https://img.shields.io/badge/docs-mkdocs-708FCC.svg?style=flat)](https://copier-org.github.io/copier-templates-extensions/)
 [![pypi version](https://img.shields.io/pypi/v/copier-templates-extensions.svg)](https://pypi.org/project/copier-templates-extensions/)
-[![gitpod](https://img.shields.io/badge/gitpod-workspace-blue.svg?style=flat)](https://gitpod.io/#https://github.com/copier-org/copier-templates-extensions)
+[![gitpod](https://img.shields.io/badge/gitpod-workspace-708FCC.svg?style=flat)](https://gitpod.io/#https://github.com/copier-org/copier-templates-extensions)
 
 Special Jinja2 extension for Copier that allows to load extensions using file paths relative to the template root instead of Python dotted paths.
 
