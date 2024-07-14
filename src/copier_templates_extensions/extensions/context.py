@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import warnings
 from typing import TYPE_CHECKING
 
 from jinja2.ext import Extension
@@ -10,11 +11,13 @@ if TYPE_CHECKING:
     from jinja2 import Environment
 from typing import Any, Callable, MutableMapping
 
+_sentinel = object()
+
 
 class ContextHook(Extension):
     """Extension allowing to modify the Copier context."""
 
-    update = True
+    update = _sentinel
 
     def __init__(extension_self: Extension, environment: Environment) -> None:  # noqa: N805
         """Initialize the object.
@@ -33,11 +36,22 @@ class ContextHook(Extension):
                 blocks: dict[str, Callable],
                 globals: MutableMapping[str, Any] | None = None,  # noqa: A002,ARG002
             ):
-                if "_copier_conf" in parent:
-                    if extension_self.update:  # type: ignore[attr-defined]
-                        parent.update(extension_self.hook(parent))  # type: ignore[attr-defined]
-                    else:
-                        extension_self.hook(parent)  # type: ignore[attr-defined]
+                if extension_self.update is not _sentinel:  # type: ignore[attr-defined]
+                    warnings.warn(
+                        "The `update` attribute of `ContextHook` subclasses is deprecated. "
+                        "The `hook` method should now always modify the `context` in place.",
+                        DeprecationWarning,
+                        stacklevel=1,
+                    )
+                if "_copier_conf" in parent and (context := extension_self.hook(parent)) is not None:  # type: ignore[attr-defined]
+                    parent.update(context)
+                    warnings.warn(
+                        "Returning a dict from the `hook` method is deprecated. "
+                        "It should now always modify the `context` in place.",
+                        DeprecationWarning,
+                        stacklevel=1,
+                    )
+
                 super().__init__(env, parent, name, blocks)
 
         environment.context_class = ContextClass
