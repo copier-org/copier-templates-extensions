@@ -5,7 +5,7 @@ build-backend = "pdm.backend"
 [project]
 name = "copier-templates-extensions"
 description = "Special Jinja2 extension for Copier that allows to load extensions using file paths relative to the template root instead of Python dotted paths."
-authors = [{name = "Timothée Mazzucotelli", email = "pawamoy@pm.me"}]
+authors = [{name = "Timothée Mazzucotelli", email = "dev@pawamoy.fr"}]
 license = {text = "ISC"}
 readme = "README.md"
 requires-python = ">=3.8"
