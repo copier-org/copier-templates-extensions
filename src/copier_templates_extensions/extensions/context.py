@@ -8,8 +8,9 @@ from typing import TYPE_CHECKING
 from jinja2.ext import Extension
 
 if TYPE_CHECKING:
+    from collections.abc import Callable, MutableMapping
+
     from jinja2 import Environment
-from typing import Any, Callable, MutableMapping
 
 _sentinel = object()
 
@@ -19,21 +20,21 @@ class ContextHook(Extension):
 
     update = _sentinel
 
-    def __init__(extension_self: Extension, environment: Environment) -> None:  # noqa: N805
+    def __init__(extension_self, environment: Environment) -> None:  # noqa: N805
         """Initialize the object.
 
         Arguments:
             environment: The Jinja environment.
         """
-        super().__init__(environment)  # type: ignore[misc]
+        super().__init__(environment)
 
-        class ContextClass(environment.context_class):  # type: ignore[name-defined]
+        class ContextClass(environment.context_class):  # type: ignore[misc,name-defined]
             def __init__(
                 self,
                 env: Environment,
                 parent: dict[str, Any],
                 name: str | None,
-                blocks: dict[str, Callable],
+                blocks: dict[str, Callable[..., Any]],
                 globals: MutableMapping[str, Any] | None = None,  # noqa: A002,ARG002
             ):
                 if extension_self.update is not _sentinel:  # type: ignore[attr-defined]
@@ -51,12 +52,11 @@ class ContextHook(Extension):
                         DeprecationWarning,
                         stacklevel=1,
                     )
-
                 super().__init__(env, parent, name, blocks)
 
         environment.context_class = ContextClass
 
-    def hook(self, context: dict) -> dict:
+    def hook(self, context: dict[str, Any]) -> dict[str, Any]:
         """Abstract hook. Does nothing.
 
         Override this method to either return
