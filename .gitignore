@@ -1,22 +1,24 @@
+# editors
 .idea/
-__pycache__/
-__pypackages__/
-*.py[cod]
-dist/
+.vscode/
+
+# python
 *.egg-info/
-build/
-htmlcov/
+*.py[cod]
+.venv/
+.venvs/
+/build/
+/dist/
+
+# tools
 .coverage*
-pip-wheel-metadata/
+/.pdm-build/
+/htmlcov/
+/site/
+
+# cache
+.cache/
 .pytest_cache/
 .mypy_cache/
-site/
-pdm.lock
-pdm.toml
-.pdm-plugins/
-.pdm-python
-__pypackages__/
-.venv/
-.pdm.toml
-pdm.lock
-.cache/
+.ruff_cache/
+__pycache__/

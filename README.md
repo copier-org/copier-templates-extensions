@@ -1,9 +1,9 @@
 # Copier Templates Extensions
 
 [![ci](https://github.com/copier-org/copier-templates-extensions/workflows/ci/badge.svg)](https://github.com/copier-org/copier-templates-extensions/actions?query=workflow%3Aci)
-[![documentation](https://img.shields.io/badge/docs-mkdocs%20material-blue.svg?style=flat)](https://copier-org.github.io/copier-templates-extensions/)
+[![documentation](https://img.shields.io/badge/docs-mkdocs-708FCC.svg?style=flat)](https://copier-org.github.io/copier-templates-extensions/)
 [![pypi version](https://img.shields.io/pypi/v/copier-templates-extensions.svg)](https://pypi.org/project/copier-templates-extensions/)
-[![gitpod](https://img.shields.io/badge/gitpod-workspace-blue.svg?style=flat)](https://gitpod.io/#https://github.com/copier-org/copier-templates-extensions)
+[![gitpod](https://img.shields.io/badge/gitpod-workspace-708FCC.svg?style=flat)](https://gitpod.io/#https://github.com/copier-org/copier-templates-extensions)
 
 Special Jinja2 extension for Copier that allows to load extensions using file paths relative to the template root instead of Python dotted paths.
 
@@ -105,27 +105,7 @@ from copier_templates_extensions import ContextHook
 
 class ContextUpdater(ContextHook):
     def hook(self, context):
-        new_context = {}
-        new_context["say"] = "hello " + context["name"]
-        return new_context
-```
-
-Using the above example, your context will be updated
-with the `new_context` returned by the method.
-If you prefer to modify the context in-place instead,
-for example to *remove* items from it,
-set the `update` class attribute to `False`:
-
-```python
-from copier_templates_extensions import ContextHook
-
-
-class ContextUpdater(ContextHook):
-    update = False
-
-    def hook(self, context):
         context["say"] = "hello " + context["name"]
-        del context["name"]
 ```
 
 In your Jinja templates, you will now have access
@@ -197,7 +177,7 @@ from copier_templates_extensions import ContextHook
 
 class ContextUpdater(ContextHook):
     def hook(self, context):
-        return {"module_name": "app" if context["project_type"] == "webapi" else "cli"}
+        context["module_name"] = "app" if context["project_type"] == "webapi" else "cli"
 ```
 
 ```

@@ -31,7 +31,7 @@ class TemplateExtensionLoader(Extension):
     def _patched_import_string(self, import_name: str, *, silent: bool = False) -> Any:
         try:
             return self._import_string(import_name)
-        except Exception:  # noqa: BLE001
+        except Exception:
             if not silent:
                 raise
 
