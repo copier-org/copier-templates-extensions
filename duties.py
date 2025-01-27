@@ -7,11 +7,13 @@ import sys
 from contextlib import contextmanager
 from importlib.metadata import version as pkgversion
 from pathlib import Path
-from typing import TYPE_CHECKING, Iterator
+from typing import TYPE_CHECKING
 
 from duty import duty, tools
 
 if TYPE_CHECKING:
+    from collections.abc import Iterator
+
     from duty.context import Context
 
 
@@ -53,8 +55,8 @@ def changelog(ctx: Context, bump: str = "") -> None:
     ctx.run(tools.git_changelog(bump=bump or None), title="Updating changelog")
 
 
-@duty(pre=["check_quality", "check_types", "check_docs", "check_dependencies", "check-api"])
-def check(ctx: Context) -> None:  # noqa: ARG001
+@duty(pre=["check-quality", "check-types", "check-docs", "check-api"])
+def check(ctx: Context) -> None:
     """Check it all!"""
 
 
@@ -82,6 +84,7 @@ def check_docs(ctx: Context) -> None:
 @duty
 def check_types(ctx: Context) -> None:
     """Check that the code is correctly typed."""
+    os.environ["FORCE_COLOR"] = "1"
     ctx.run(
         tools.mypy(*PY_SRC_LIST, config_file="config/mypy.ini"),
         title=pyprefix("Type-checking"),
