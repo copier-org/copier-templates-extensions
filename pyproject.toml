@@ -28,7 +28,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "copier>=9.2",
+    "copier>=9.5",
 ]
 
 [project.urls]
