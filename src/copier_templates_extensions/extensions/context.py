@@ -3,13 +3,15 @@
 from __future__ import annotations
 
 import warnings
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Callable
 
 from jinja2.ext import Extension
 
 if TYPE_CHECKING:
+    from collections.abc import MutableMapping
+
     from jinja2 import Environment
-from typing import Any, Callable, MutableMapping
+
 
 _sentinel = object()
 
