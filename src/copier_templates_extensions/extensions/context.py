@@ -45,7 +45,11 @@ class ContextHook(Extension):
                         DeprecationWarning,
                         stacklevel=1,
                     )
-                if "_copier_conf" in parent and (context := extension_self.hook(parent)) is not None:  # type: ignore[attr-defined]
+
+                if (
+                    parent["_copier_conf"]["_phase"] == "render"
+                    and (context := extension_self.hook(parent)) is not None  # type: ignore[attr-defined]
+                ):
                     parent.update(context)
                     warnings.warn(
                         "Returning a dict from the `hook` method is deprecated. "
