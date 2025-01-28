@@ -1,5 +1,9 @@
 """Tests for the `extensions` module."""
 
+from __future__ import annotations
+
+import shutil
+import subprocess
 from pathlib import Path
 
 import copier
@@ -7,6 +11,15 @@ import pytest
 from copier.errors import UserMessageError
 
 TEMPLATES_DIRECTORY = Path(__file__).parent / "fixtures"
+
+
+def git(*args: str | Path) -> None:
+    """Run a git command.
+
+    Arguments:
+        *args: The git command to run.
+    """
+    subprocess.run(["git", *args], check=True)
 
 
 @pytest.mark.parametrize(
@@ -77,3 +90,28 @@ def test_deprecated_usage(tmp_path: Path, template_name: str) -> None:
     result_file = tmp_path / "result.txt"
     assert result_file.exists()
     assert result_file.read_text() == "Success variable: True"
+
+
+def test_update(tmp_path_factory: pytest.TempPathFactory) -> None:
+    """Test updating a project.
+
+    Arguments:
+        tmp_path: A pytest fixture.
+        expected: The parametrized value we expect.
+    """
+    src_path = tmp_path_factory.mktemp("template")
+    dest_path = tmp_path_factory.mktemp("project")
+
+    shutil.copytree(TEMPLATES_DIRECTORY / "update_project", src_path, dirs_exist_ok=True)
+    git("-C", src_path, "init")
+    git("-C", src_path, "add", "-A", ".")
+    git("-C", src_path, "commit", "-m", "Initial commit")
+    git("-C", src_path, "tag", "0.1.0")
+
+    copier.run_copy(str(src_path), dest_path, unsafe=True, overwrite=True, defaults=True, data={"the_question": "the_answer"})
+    git("-C", dest_path, "init")
+    git("-C", dest_path, "add", "-A", ".")
+    git("-C", dest_path, "commit", "-m", "Initial commit")
+    git("-C", dest_path, "tag", "1.0.0")
+
+    copier.run_update(dest_path, unsafe=True, overwrite=True, data={"the_question": "the_answer2"})
