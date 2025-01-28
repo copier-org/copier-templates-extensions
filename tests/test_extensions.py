@@ -19,7 +19,7 @@ def git(*args: str | Path) -> None:
     Arguments:
         *args: The git command to run.
     """
-    subprocess.run(["git", *args], check=True)
+    subprocess.run(["git", *args], check=True)  # noqa: S603,S607
 
 
 @pytest.mark.parametrize(
@@ -108,7 +108,14 @@ def test_update(tmp_path_factory: pytest.TempPathFactory) -> None:
     git("-C", src_path, "commit", "-m", "Initial commit")
     git("-C", src_path, "tag", "0.1.0")
 
-    copier.run_copy(str(src_path), dest_path, unsafe=True, overwrite=True, defaults=True, data={"the_question": "the_answer"})
+    copier.run_copy(
+        str(src_path),
+        dest_path,
+        unsafe=True,
+        overwrite=True,
+        defaults=True,
+        data={"the_question": "the_answer"},
+    )
     git("-C", dest_path, "init")
     git("-C", dest_path, "add", "-A", ".")
     git("-C", dest_path, "commit", "-m", "Initial commit")
