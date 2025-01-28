@@ -25,6 +25,8 @@ def git(*args: str | Path) -> None:
         env={
             "GIT_AUTHOR_NAME": "Copier Test",
             "GIT_AUTHOR_EMAIL": "copier@test",
+            "GIT_COMMITTER_NAME": "Copier Test",
+            "GIT_COMMITTER_EMAIL": "copier@test",
         },
     )
 
