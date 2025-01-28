@@ -19,7 +19,14 @@ def git(*args: str | Path) -> None:
     Arguments:
         *args: The git command to run.
     """
-    subprocess.run(["git", *args], check=True)  # noqa: S603,S607
+    subprocess.run(  # noqa: S603
+        ["git", *args],  # noqa: S607
+        check=True,
+        env={
+            "GIT_AUTHOR_NAME": "Copier Test",
+            "GIT_AUTHOR_EMAIL": "copier@test",
+        },
+    )
 
 
 @pytest.mark.parametrize(
