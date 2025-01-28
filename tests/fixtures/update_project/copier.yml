@@ -1,0 +1,6 @@
+_jinja_extensions:
+- copier_templates_extensions.TemplateExtensionLoader
+- extensions.py:ContextUpdater
+
+the_question:
+  type: str

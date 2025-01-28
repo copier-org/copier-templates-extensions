@@ -114,4 +114,4 @@ def test_update(tmp_path_factory: pytest.TempPathFactory) -> None:
     git("-C", dest_path, "commit", "-m", "Initial commit")
     git("-C", dest_path, "tag", "1.0.0")
 
-    copier.run_update(dest_path, unsafe=True, overwrite=True, data={"the_question": "the_answer2"})
+    copier.run_update(dest_path, unsafe=True, overwrite=True)
