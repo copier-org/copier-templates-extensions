@@ -193,17 +193,27 @@ class ContextUpdater(ContextHook):
     └── 📄 {{module_name}}.py.jinja
 ```
 
-## How does it work?
+You can do many more things with a context hook,
+like downloading data from external resources
+to include it in the context, etc.
 
-Beware the ugly hack!
-Upon loading the special *loader* extension,
-the function responsible for importing
-a Python object using its dotted-path (a string)
-is patched in the `jinja.environment` module,
-where it's used to load extensions.
-The patched version adds support
-for loading extensions using relative file paths.
-The file system loader of the Jinja environment
-and its `searchpaths` attribute are used to
-find the local clone of the template and determine
-the absolute path of the extensions to load.
+> [!TIP]
+> **Context hooks run during every Copier rendering phase.**
+> During project generation or project updates, Copier passes
+> through several rendering phases: when prompting (questions / answers),
+> when rendering files, when running tasks, and when running migrations.
+>
+> By default, a context hook runs during all these phases,
+> possibly multiple times, for example once per prompted question,
+> or once per rendered file. The task of running the hook only once,
+> or during a specific phase only, is left to you.
+>
+> To run only once, you can use caching within your class
+> (for example by storing computed values in class variables).
+>
+> To run during a specific phase only, you can check the value
+> of `context["_copier_phase"]` (Copier 9.5+), which is one of:
+> `"prompt"`, `"render"`, `"tasks"`, `"migrate"`.
+>
+> Other key-value pairs can be found in the context
+> that you might find useful (Copier configuration, etc.).
