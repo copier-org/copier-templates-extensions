@@ -36,7 +36,7 @@ class ContextHook(Extension):
                 parent: dict[str, Any],
                 name: str | None,
                 blocks: dict[str, Callable],
-                globals: MutableMapping[str, Any] | None = None,  # noqa: A002,ARG002
+                globals: MutableMapping[str, Any] | None = None,  # noqa: A002
             ):
                 if extension_self.update is not _sentinel:  # type: ignore[attr-defined]
                     warnings.warn(
@@ -54,7 +54,7 @@ class ContextHook(Extension):
                         stacklevel=1,
                     )
 
-                super().__init__(env, parent, name, blocks)
+                super().__init__(env, parent, name, blocks, globals)
 
         environment.context_class = ContextClass
 
