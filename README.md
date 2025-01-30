@@ -17,7 +17,7 @@ pip install copier-templates-extensions
 With uv:
 
 ```bash
-uv tool install copier --with copie-templates-extensions
+uv tool install copier --with copier-templates-extensions
 ```
 
 With pipx:
