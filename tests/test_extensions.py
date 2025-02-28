@@ -77,3 +77,16 @@ def test_deprecated_usage(tmp_path: Path, template_name: str) -> None:
     result_file = tmp_path / "result.txt"
     assert result_file.exists()
     assert result_file.read_text() == "Success variable: True"
+
+
+def test_answer_access(tmp_path: Path) -> None:
+    """Test accessing an answer.
+
+    Arguments:
+        tmp_path: A pytest fixture.
+    """
+    template_path = TEMPLATES_DIRECTORY / "answer_access"
+    copier.run_copy(str(template_path), tmp_path, data={"foo": "bar"}, defaults=True, overwrite=True, unsafe=True)
+    result_file = tmp_path / "result.txt"
+    assert result_file.exists()
+    assert result_file.read_text() == "Success variable: True"
