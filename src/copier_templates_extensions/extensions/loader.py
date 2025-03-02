@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
+import sys
 from typing import TYPE_CHECKING, Any
 
 from copier.errors import UserMessageError
@@ -80,9 +81,10 @@ class TemplateExtensionLoader(Extension):
                 "Please report this issue to the template maintainers.",
             )
         spec = spec_from_file_location(
-            f"copier_templates_extensions.{module_name}",
+            module_full_name := f"copier_templates_extensions.{module_name}",
             template_relative_path,
         )
         module = module_from_spec(spec)  # type: ignore[arg-type]
+        sys.modules[module_full_name] = module
         spec.loader.exec_module(module)  # type: ignore[union-attr]
         return module
