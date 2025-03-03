@@ -18,6 +18,7 @@ TEMPLATES_DIRECTORY = Path(__file__).parent / "fixtures"
         ("modifying_context", "True"),
         ("not_updating_context_for_prompts", "True"),
         ("loading_normal_extension", "not set"),
+        ("dataclass", "True"),
     ],
 )
 def test_extensions(tmp_path: Path, template_name: str, expected: str) -> None:
