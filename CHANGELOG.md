@@ -5,6 +5,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [0.3.1](https://github.com/pawamoy/copier-templates-extensions/releases/tag/0.3.1) - 2025-03-10
+
+<small>[Compare with 0.3.0](https://github.com/pawamoy/copier-templates-extensions/compare/0.3.0...0.3.1)</small>
+
+### Dependencies
+
+- Depend on Copier 9.2+ ([43679a9](https://github.com/pawamoy/copier-templates-extensions/commit/43679a9719b2d05e041e674bde1f10dee21984a6) by Timothée Mazzucotelli).
+
+### Bug Fixes
+
+- Add loaded module to `sys.modules` to help libraries using data from annotation scopes ([a290f27](https://github.com/pawamoy/copier-templates-extensions/commit/a290f271e302db88bcc755d57c647e4f3a8043ff) by Axel H.). [PR-12](https://github.com/copier-org/copier-templates-extensions/pull/12)
+
+### Code Refactoring
+
+- Move modules into internal folder (and simplify API docs) ([a8c0377](https://github.com/pawamoy/copier-templates-extensions/commit/a8c03770298f51fa07667598fd7d0b72196aecad) by Timothée Mazzucotelli).
+- Pass globals to parent constructor ([ea4567b](https://github.com/pawamoy/copier-templates-extensions/commit/ea4567bcfad0f17764e17d6b7fd12a7fd7a33cba) by Timothée Mazzucotelli).
+- Deprecate the "update" aspect of context hooks ([876c055](https://github.com/pawamoy/copier-templates-extensions/commit/876c0554e34b630ab255111b69da74db16439dcb) by Timothée Mazzucotelli). [Issue-4](https://github.com/copier-org/copier-templates-extensions/issues/4)
+
 ## [0.3.0](https://github.com/copier-org/copier-templates-extensions/releases/tag/0.3.0) - 2022-09-12
 
 <small>[Compare with 0.2.0](https://github.com/copier-org/copier-templates-extensions/compare/0.2.0...0.3.0)</small>
