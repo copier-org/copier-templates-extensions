@@ -212,7 +212,7 @@ to include it in the context, etc.
 > (for example by storing computed values in class variables).
 >
 > To run during a specific phase only, you can check the value
-> of `context["_copier_phase"]` (Copier 9.5+), which is one of:
+> of `context["_copier_phase"]` (Copier 9.6+), which is one of:
 > `"prompt"`, `"render"`, `"tasks"`, `"migrate"`.
 >
 > Other key-value pairs can be found in the context
