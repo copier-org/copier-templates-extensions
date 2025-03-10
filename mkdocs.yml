@@ -20,8 +20,7 @@ nav:
   - Credits: credits.md
   - License: license.md
 # defer to gen-files + literate-nav
-- API reference:
-  - Copier Templates Extensions: reference/
+- API reference: reference/
 - Development:
   - Contributing: contributing.md
   - Code of Conduct: code_of_conduct.md
@@ -41,7 +40,8 @@ theme:
   - content.code.copy
   - content.tooltips
   - navigation.footer
-  - navigation.indexes
+  - navigation.instant.preview
+  - navigation.path
   - navigation.sections
   - navigation.tabs
   - navigation.tabs.sticky
@@ -102,16 +102,17 @@ markdown_extensions:
 plugins:
 - search
 - markdown-exec
+- section-index
 - gen-files:
     scripts:
-    - scripts/gen_ref_nav.py
+    - scripts/gen_api_ref.py
 - literate-nav:
-    nav_file: SUMMARY.md
+    nav_file: SUMMARY.txt
 - coverage
 - mkdocstrings:
     handlers:
       python:
-        import:
+        inventories:
         - https://docs.python.org/3/objects.inv
         paths: [src]
         options:
@@ -131,6 +132,12 @@ plugins:
           show_symbol_type_toc: true
           signature_crossrefs: true
           summary: true
+- llmstxt:
+    files:
+    - output: llms-full.txt
+      inputs:
+      - index.md
+      - reference/**.md
 - git-revision-date-localized:
     enabled: !ENV [DEPLOY, false]
     enable_creation_date: true
