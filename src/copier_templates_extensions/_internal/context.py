@@ -1,4 +1,4 @@
-"""Extension allowing to modify the Copier context."""
+# Extension allowing to modify the Copier context.
 
 from __future__ import annotations
 

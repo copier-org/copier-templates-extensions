@@ -1,4 +1,4 @@
-"""Extension allowing to load other extensions using relative file paths."""
+# Extension allowing to load other extensions using relative file paths.
 
 from __future__ import annotations
 
