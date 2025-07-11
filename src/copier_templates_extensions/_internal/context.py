@@ -19,7 +19,8 @@ _sentinel = object()
 class ContextHook(Extension):
     """Extension allowing to modify the Copier context."""
 
-    update = _sentinel
+    update: bool = _sentinel  # type: ignore[assignment]
+    """Deprecated attribute to indicate whether the context should be updated with the value returned by `hook`."""
 
     def __init__(extension_self: Extension, environment: Environment) -> None:  # noqa: N805
         """Initialize the object.

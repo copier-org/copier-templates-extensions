@@ -73,7 +73,7 @@ def test_deprecated_usage(tmp_path: Path, template_name: str) -> None:
         template_name: The parametrized template to use.
     """
     template_path = TEMPLATES_DIRECTORY / template_name
-    with pytest.warns(DeprecationWarning):
+    with pytest.warns(DeprecationWarning):  # noqa: PT030
         copier.run_copy(str(template_path), tmp_path, defaults=True, overwrite=True, unsafe=True)
     result_file = tmp_path / "result.txt"
     assert result_file.exists()
