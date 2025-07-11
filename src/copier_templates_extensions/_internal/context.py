@@ -58,7 +58,7 @@ class ContextHook(Extension):
 
         environment.context_class = ContextClass
 
-    def hook(self, context: dict) -> dict:
+    def hook(self, context: dict[str, Any]) -> dict[str, Any] | None:
         """Abstract hook. Does nothing.
 
         Override this method to either return
