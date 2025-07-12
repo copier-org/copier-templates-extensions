@@ -1,4 +1,4 @@
-"""Tests suite for `copier_templates_extensions`."""
+"""Tests suite for `copier_template_extensions`."""
 
 from pathlib import Path
 

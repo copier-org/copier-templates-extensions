@@ -10,7 +10,7 @@ import griffe
 import pytest
 from mkdocstrings import Inventory
 
-import copier_templates_extensions
+import copier_template_extensions
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -19,19 +19,19 @@ if TYPE_CHECKING:
 @pytest.fixture(name="loader", scope="module")
 def _fixture_loader() -> griffe.GriffeLoader:
     loader = griffe.GriffeLoader()
-    loader.load("copier_templates_extensions")
+    loader.load("copier_template_extensions")
     loader.resolve_aliases()
     return loader
 
 
 @pytest.fixture(name="internal_api", scope="module")
 def _fixture_internal_api(loader: griffe.GriffeLoader) -> griffe.Module:
-    return loader.modules_collection["copier_templates_extensions._internal"]
+    return loader.modules_collection["copier_template_extensions._internal"]
 
 
 @pytest.fixture(name="public_api", scope="module")
 def _fixture_public_api(loader: griffe.GriffeLoader) -> griffe.Module:
-    return loader.modules_collection["copier_templates_extensions"]
+    return loader.modules_collection["copier_template_extensions"]
 
 
 def _yield_public_objects(
@@ -97,11 +97,11 @@ def _fixture_inventory() -> Inventory:
 
 
 def test_exposed_objects(modulelevel_internal_objects: list[griffe.Object | griffe.Alias]) -> None:
-    """All public objects in the internal API are exposed under `copier_templates_extensions`."""
+    """All public objects in the internal API are exposed under `copier_template_extensions`."""
     not_exposed = [
         obj.path
         for obj in modulelevel_internal_objects
-        if obj.name not in copier_templates_extensions.__all__ or not hasattr(copier_templates_extensions, obj.name)
+        if obj.name not in copier_template_extensions.__all__ or not hasattr(copier_template_extensions, obj.name)
     ]
     assert not not_exposed, "Objects not exposed:\n" + "\n".join(sorted(not_exposed))
 
@@ -122,7 +122,7 @@ def test_single_locations(public_api: griffe.Module) -> None:
         return obj.is_public and (obj.parent is None or _public_path(obj.parent))
 
     multiple_locations = {}
-    for obj_name in copier_templates_extensions.__all__:
+    for obj_name in copier_template_extensions.__all__:
         obj = public_api[obj_name]
         if obj.aliases and (
             public_aliases := [path for path, alias in obj.aliases.items() if path != obj.path and _public_path(alias)]
@@ -151,12 +151,12 @@ def test_inventory_matches_api(
     """The inventory doesn't contain any additional Python object."""
     not_in_api = []
     public_api_paths = {obj.path for obj in public_objects}
-    public_api_paths.add("copier_templates_extensions")
+    public_api_paths.add("copier_template_extensions")
     for item in inventory.values():
         if (
             item.domain == "py"
             and "(" not in item.name
-            and (item.name == "copier_templates_extensions" or item.name.startswith("copier_templates_extensions."))
+            and (item.name == "copier_template_extensions" or item.name.startswith("copier_template_extensions."))
         ):
             obj = loader.modules_collection[item.name]
             if obj.path not in public_api_paths and not any(path in public_api_paths for path in obj.aliases):

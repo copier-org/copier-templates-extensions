@@ -1,10 +1,10 @@
-site_name: "Copier Templates Extensions"
+site_name: "Copier Template-Extensions"
 site_description: "Special Jinja2 extension for Copier that allows to load extensions using file paths relative to the template root instead of Python dotted paths."
-site_url: "https://copier-org.github.io/copier-templates-extensions"
-repo_url: "https://github.com/copier-org/copier-templates-extensions"
-repo_name: "copier-org/copier-templates-extensions"
+site_url: "https://copier-org.github.io/copier-template-extensions"
+repo_url: "https://github.com/copier-org/copier-template-extensions"
+repo_name: "copier-org/copier-template-extensions"
 site_dir: "site"
-watch: [mkdocs.yml, README.md, CONTRIBUTING.md, CHANGELOG.md, src/copier_templates_extensions]
+watch: [mkdocs.yml, README.md, CONTRIBUTING.md, CHANGELOG.md, src/copier_template_extensions]
 copyright: Copyright &copy; 2021 Timothée Mazzucotelli
 edit_uri: edit/main/docs/
 
@@ -155,9 +155,9 @@ extra:
   - icon: fontawesome/brands/twitter
     link: https://twitter.com/pawamoy
   - icon: fontawesome/brands/gitter
-    link: https://gitter.im/copier-templates-extensions/community
+    link: https://gitter.im/copier-template-extensions/community
   - icon: fontawesome/brands/python
-    link: https://pypi.org/project/copier-templates-extensions/
+    link: https://pypi.org/project/copier-template-extensions/
   analytics:
     feedback:
       title: Was this page helpful?

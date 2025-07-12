@@ -14,7 +14,7 @@
             "name": "run",
             "type": "debugpy",
             "request": "launch",
-            "module": "copier_templates_extensions",
+            "module": "copier_template_extensions",
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": "${command:pickArgs}"
