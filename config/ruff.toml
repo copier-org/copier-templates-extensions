@@ -78,7 +78,7 @@ docstring-quotes = "double"
 ban-relative-imports = "all"
 
 [lint.isort]
-known-first-party = ["copier_templates_extensions"]
+known-first-party = ["copier_template_extensions"]
 
 [lint.pydocstyle]
 convention = "google"

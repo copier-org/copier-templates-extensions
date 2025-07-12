@@ -11,11 +11,11 @@ copyright_license: ISC
 insiders: false
 project_description: Special Jinja2 extension for Copier that allows to load extensions
     using file paths relative to the template root instead of Python dotted paths.
-project_name: Copier Templates Extensions
+project_name: Copier Template-Extensions
 python_package_command_line_name: ''
-python_package_distribution_name: copier-templates-extensions
-python_package_import_name: copier_templates_extensions
-repository_name: copier-templates-extensions
+python_package_distribution_name: copier-template-extensions
+python_package_import_name: copier_template_extensions
+repository_name: copier-template-extensions
 repository_namespace: copier-org
 repository_provider: github.com
 

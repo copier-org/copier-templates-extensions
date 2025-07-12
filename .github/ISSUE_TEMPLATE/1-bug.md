@@ -50,7 +50,7 @@ PASTE TRACEBACK HERE
      redacting sensitive information. -->
 
 ```bash
-python -m copier_templates_extensions._internal.debug  # | xclip -selection clipboard
+python -m copier_template_extensions._internal.debug  # | xclip -selection clipboard
 ```
 
 PASTE MARKDOWN OUTPUT HERE
