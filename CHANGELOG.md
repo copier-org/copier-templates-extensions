@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [0.3.3](https://github.com/pawamoy/copier-templates-extensions/releases/tag/0.3.3) - 2025-07-15
+
+<small>[Compare with 0.3.2](https://github.com/pawamoy/copier-templates-extensions/compare/0.3.2...0.3.3)</small>
+
+### Code Refactoring
+
+- Expose old paths to ease migration ([4206907](https://github.com/pawamoy/copier-templates-extensions/commit/420690745a82a88d5a447e977bf1486f2690e707) by Timothée Mazzucotelli). [PR-16](https://github.com/copier-org/copier-template-extensions/pull/16)
+
 ## [0.3.2](https://github.com/pawamoy/copier-templates-extensions/releases/tag/0.3.2) - 2025-07-15
 
 <small>[Compare with 0.3.1](https://github.com/pawamoy/copier-templates-extensions/compare/0.3.1...0.3.2)</small>
