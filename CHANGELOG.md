@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [0.3.2](https://github.com/pawamoy/copier-templates-extensions/releases/tag/0.3.2) - 2025-07-15
+
+<small>[Compare with 0.3.1](https://github.com/pawamoy/copier-templates-extensions/compare/0.3.1...0.3.2)</small>
+
+- Rename project to `copier-template-extensions` (singular template), to be proper english: Copier Template-Extensions.
+
 ## [0.3.1](https://github.com/pawamoy/copier-template-extensions/releases/tag/0.3.1) - 2025-03-10
 
 <small>[Compare with 0.3.0](https://github.com/pawamoy/copier-template-extensions/compare/0.3.0...0.3.1)</small>
