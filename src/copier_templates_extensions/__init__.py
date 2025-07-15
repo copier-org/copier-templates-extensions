@@ -9,7 +9,7 @@ from copier_template_extensions import ContextHook, TemplateExtensionLoader
 __all__: list[str] = ["ContextHook", "TemplateExtensionLoader"]
 
 warnings.warn(
-    "The `copier-templates-extensions` is renamed `copier-template-extensions`. "
+    "`copier-templates-extensions` is renamed `copier-template-extensions`. "
     "Please use the new name, and replace every occurrence of "
     "`copier-templates-extensions` and `copier_templates_extensions` in your template with "
     "`copier-template-extensions` and `copier_template_extensions` respectively.",
