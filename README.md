@@ -1,8 +1,8 @@
-# Copier Templates Extensions
+# Copier Template-Extensions
 
-[![ci](https://github.com/copier-org/copier-templates-extensions/workflows/ci/badge.svg)](https://github.com/copier-org/copier-templates-extensions/actions?query=workflow%3Aci)
-[![documentation](https://img.shields.io/badge/docs-mkdocs-708FCC.svg?style=flat)](https://copier-org.github.io/copier-templates-extensions/)
-[![pypi version](https://img.shields.io/pypi/v/copier-templates-extensions.svg)](https://pypi.org/project/copier-templates-extensions/)
+[![ci](https://github.com/copier-org/copier-template-extensions/workflows/ci/badge.svg)](https://github.com/copier-org/copier-template-extensions/actions?query=workflow%3Aci)
+[![documentation](https://img.shields.io/badge/docs-mkdocs-708FCC.svg?style=flat)](https://copier-org.github.io/copier-template-extensions/)
+[![pypi version](https://img.shields.io/pypi/v/copier-template-extensions.svg)](https://pypi.org/project/copier-template-extensions/)
 
 Special Jinja2 extension for Copier that allows to load extensions using file paths relative to the template root instead of Python dotted paths.
 
@@ -11,20 +11,20 @@ Special Jinja2 extension for Copier that allows to load extensions using file pa
 With pip:
 
 ```bash
-pip install copier-templates-extensions
+pip install copier-template-extensions
 ```
 
 With uv:
 
 ```bash
-uv tool install copier --with copier-templates-extensions
+uv tool install copier --with copier-template-extensions
 ```
 
 With pipx:
 
 ```bash
 pipx install copier
-pipx inject copier copier-templates-extensions
+pipx inject copier copier-template-extensions
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ and the class name after a colon:
 
 ```yaml
 _jinja_extensions:
-- copier_templates_extensions.TemplateExtensionLoader
+- copier_template_extensions.TemplateExtensionLoader
 - extensions/context.py:ContextUpdater
 - extensions/slugify.py:SlugifyExtension
 ```
@@ -103,7 +103,7 @@ create a class that inherits from `ContextHook`,
 and override its `hook` method:
 
 ```python
-from copier_templates_extensions import ContextHook
+from copier_template_extensions import ContextHook
 
 
 class ContextUpdater(ContextHook):
@@ -175,7 +175,7 @@ As you can see, both forms are really ugly to write:
 **Using our context hook instead makes it so easy and clean!**
 
 ```python
-from copier_templates_extensions import ContextHook
+from copier_template_extensions import ContextHook
 
 
 class ContextUpdater(ContextHook):

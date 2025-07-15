@@ -81,7 +81,7 @@ class TemplateExtensionLoader(Extension):
                 "Please report this issue to the template maintainers.",
             )
         spec = spec_from_file_location(
-            module_full_name := f"copier_templates_extensions.{module_name}",
+            module_full_name := f"copier_template_extensions.{module_name}",
             template_relative_path,
         )
         module = module_from_spec(spec)  # type: ignore[arg-type]

@@ -4,4 +4,4 @@ hide:
 - navigation
 ---
 
-# ::: copier_templates_extensions
+# ::: copier_template_extensions

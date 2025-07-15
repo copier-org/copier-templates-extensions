@@ -56,7 +56,7 @@ def _interpreter_name_version() -> tuple[str, str]:
     return "", "0.0.0"
 
 
-def _get_version(dist: str = "copier-templates-extensions") -> str:
+def _get_version(dist: str = "copier-template-extensions") -> str:
     """Get version of the given distribution.
 
     Parameters:
@@ -78,8 +78,8 @@ def _get_debug_info() -> _Environment:
         Environment information.
     """
     py_name, py_version = _interpreter_name_version()
-    packages = ["copier-templates-extensions"]
-    variables = ["PYTHONPATH", *[var for var in os.environ if var.startswith("COPIER_TEMPLATES_EXTENSIONS")]]
+    packages = ["copier-template-extensions"]
+    variables = ["PYTHONPATH", *[var for var in os.environ if var.startswith("copier_template_extensions")]]
     return _Environment(
         interpreter_name=py_name,
         interpreter_version=py_version,

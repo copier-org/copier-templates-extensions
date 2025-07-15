@@ -3,7 +3,7 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-name = "copier-templates-extensions"
+name = "copier-template-extensions"
 description = "Special Jinja2 extension for Copier that allows to load extensions using file paths relative to the template root instead of Python dotted paths."
 authors = [{name = "Timothée Mazzucotelli", email = "dev@pawamoy.fr"}]
 license = "ISC"
@@ -33,12 +33,12 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/copier-org/copier-templates-extensions"
-Documentation = "https://github.com/copier-org/copier-templates-extensions"
-Changelog = "https://github.com/copier-org/copier-templates-extensions/blob/main/CHANGELOG.md"
-Repository = "https://github.com/copier-org/copier-templates-extensions"
-Issues = "https://github.com/copier-org/copier-templates-extensions/issues"
-Discussions = "https://github.com/copier-org/copier-templates-extensions/discussions"
+Homepage = "https://github.com/copier-org/copier-template-extensions"
+Documentation = "https://github.com/copier-org/copier-template-extensions"
+Changelog = "https://github.com/copier-org/copier-template-extensions/blob/main/CHANGELOG.md"
+Repository = "https://github.com/copier-org/copier-template-extensions"
+Issues = "https://github.com/copier-org/copier-template-extensions/issues"
+Discussions = "https://github.com/copier-org/copier-template-extensions/discussions"
 Funding = "https://github.com/sponsors/pawamoy"
 
 [tool.pdm.version]

@@ -1,5 +1,5 @@
 _jinja_extensions:
-- copier_templates_extensions.TemplateExtensionLoader
+- copier_template_extensions.TemplateExtensionLoader
 - extensions.py:ContextUpdater
 
 name:
